@@ -1,0 +1,139 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="robots" content="noindex,nofollow,noarchive">
+<meta name="theme-color" content="#102f56">
+<title>Moto Nzuri | Management</title>
+<link rel="stylesheet" href="/admin.css?v=3.5.2">
+<link rel="stylesheet" href="/portal-themes.css?v=3.5.2">
+<link rel="icon" type="image/svg+xml" href="/favicon.svg">
+<link rel="apple-touch-icon" href="/favicon.svg">
+</head>
+<body>
+<div id="login" class="login-page">
+  <div class="login-card">
+    <img class="mn-logo logo-image" src="/moto-nzuri-logo.svg" alt="Moto Nzuri">
+    <div class="kicker">MOTO NZURI</div>
+    <h1>Management Portal</h1>
+    <p class="muted">Secure access for authorized operations administrators.</p>
+    <form id="loginForm" novalidate>
+      <label>Email<input id="loginEmail" type="email" autocomplete="username" required placeholder="admin@example.com"></label>
+      <label>Password<input id="loginPassword" type="password" autocomplete="current-password" required placeholder="Your password"></label>
+      <button id="loginButton" class="btn primary full" type="submit">Sign in</button>
+      <div id="loginMessage" class="message" role="alert"></div>
+    </form>
+  </div>
+</div>
+
+<div id="dashboard" class="dashboard" hidden>
+  <header class="topbar">
+    <div class="brand"><img class="mn-logo mini logo-image" src="/favicon.svg" alt="Moto Nzuri"><div><strong>MOTO NZURI</strong><span>OPERATIONS MANAGEMENT</span></div></div>
+    <div class="topbar-actions"><span id="adminEmail" class="email-chip"></span><button id="themeButton" class="icon-btn" type="button" title="Toggle theme" aria-label="Toggle theme">◐</button><button id="fullscreenButton" class="icon-btn" type="button" title="Fullscreen" aria-label="Fullscreen">⛶</button><button id="logoutButton" class="btn ghost">Log out</button></div>
+  </header>
+  <div id="themePanel" class="theme-panel" hidden><div class="theme-title">Workspace theme</div>
+<button type="button" data-theme-choice="monokai"><span class="theme-swatch monokai"></span>Monokai</button><button type="button" data-theme-choice="daylight"><span class="theme-swatch daylight"></span>Daylight</button><button type="button" data-theme-choice="san-francisco"><span class="theme-swatch san-francisco"></span>San Francisco</button><button type="button" data-theme-choice="africa"><span class="theme-swatch africa"></span>Africa</button><button type="button" data-theme-choice="tokyo-night"><span class="theme-swatch tokyo-night"></span>Tokyo Night</button><button type="button" data-theme-choice="tokyo-day"><span class="theme-swatch tokyo-day"></span>Tokyo Day</button></div>
+  <div class="shell">
+    <aside class="sidebar">
+      <div class="nav-title">Management</div>
+      <button class="nav-link active" data-view="overview">Overview</button>
+      <button class="nav-link" data-view="shops">Shops & Agents</button>
+      <button class="nav-link" data-view="drivers">Drivers</button>
+      <button class="nav-link" data-view="representatives">Agent Reps</button>
+      <button class="nav-link" data-view="technicians">Technicians</button>
+      <button class="nav-link" data-view="rep-submissions">Rep Submissions</button>
+      <button class="nav-link" data-view="customer-care">Customer Care</button>
+      <button class="nav-link" data-view="admins">Administrators</button>
+      <button class="nav-link" data-view="vehicles">Vehicles</button>
+      <button class="nav-link" data-view="fuel">Machine Fuel</button>
+      <button class="nav-link" data-view="issues">Vehicle Issues</button>
+      <button class="nav-link" data-view="security">Security</button>
+      <div class="sidebar-footer"><span class="status-dot"></span> System connected</div>
+    </aside>
+
+    <main class="main">
+      <div id="globalNotice" class="notice" hidden></div>
+
+      <section id="view-overview" class="view active">
+        <div class="page-title"><div><div class="kicker">COMMAND CENTER</div><h2>Operations overview</h2><p>Monitor shops, field agents, drivers, vehicles and machine activity.</p></div><button id="refreshButton" class="btn primary">Refresh</button></div>
+        <div id="stats" class="stats-grid"></div>
+        <div class="two-col">
+          <article class="card"><div class="card-title"><div><div class="kicker">FIELD COVERAGE</div><h3>Locations</h3></div></div><div id="locations"></div></article>
+          <article class="card"><div class="card-title"><div><div class="kicker">OPERATIONS</div><h3>Live signals</h3></div></div><div id="signals"></div></article>
+        </div>
+      </section>
+
+      <section id="view-shops" class="view">
+        <div class="page-title"><div><div class="kicker">FIELD NETWORK</div><h2>Shops & agents</h2><p>Contacts, selling status, machine status and GPS.</p></div><button id="exportButton" class="btn secondary">Export CSV</button></div>
+        <div class="card filter-bar"><input id="shopSearch" placeholder="Search shop, KP, agent, phone or location"><select id="shopLocation"><option value="">All locations</option></select><select id="shopSelling"><option value="">Selling status</option><option value="true">Selling</option><option value="false">Not selling</option></select><select id="shopMachine"><option value="">Machine status</option><option value="true">Needs machine</option><option value="false">Has machine</option></select><button id="shopApply" class="btn primary">Apply</button></div>
+        <div class="card table-card"><div class="table-scroll"><table><thead><tr><th>Shop</th><th>KP</th><th>Location</th><th>Agent</th><th>Contacts</th><th>Status</th><th>GPS</th><th>Date</th></tr></thead><tbody id="shopRows"></tbody></table></div></div>
+      </section>
+
+      <section id="view-drivers" class="view">
+        <div class="page-title"><div><div class="kicker">PEOPLE & ACCESS</div><h2>Drivers</h2><p>Create accounts, assign vehicles and control access.</p></div><button id="addDriver" class="btn primary">+ Add driver</button></div>
+        <div class="card table-card"><div class="table-scroll"><table><thead><tr><th>Name</th><th>Email</th><th>Phone</th><th>Vehicle</th><th>Status</th><th>Actions</th></tr></thead><tbody id="driverRows"></tbody></table></div></div>
+      </section>
+
+      <section id="view-representatives" class="view">
+        <div class="page-title"><div><div class="kicker">PEOPLE & ACCESS</div><h2>Agent representatives</h2><p>Create and manage representative login accounts and access.</p></div><button id="addRepresentative" class="btn primary">+ Add representative</button></div>
+        <div class="card table-card"><div class="table-scroll"><table><thead><tr><th>Name</th><th>Email</th><th>Phone</th><th>Status</th><th>Created</th><th>Actions</th></tr></thead><tbody id="representativeRows"></tbody></table></div></div>
+      </section>
+      <section id="view-technicians" class="view">
+        <div class="page-title"><div><div class="kicker">FIELD SERVICE</div><h2>Technicians</h2><p>Create technician accounts so managers can assign field tickets securely.</p></div><button id="addTechnician" class="btn primary">+ Add technician</button></div>
+        <div class="card table-card"><div class="table-scroll"><table><thead><tr><th>Name</th><th>Email</th><th>Phone</th><th>Status</th><th>Created</th></tr></thead><tbody id="technicianRows"></tbody></table></div></div>
+      </section>
+
+      <section id="view-rep-submissions" class="view">
+        <div class="page-title"><div><div class="kicker">FIELD INTAKE</div><h2>Representative submissions</h2><p>Shop records submitted by agent representatives, separate from driver fuel logs and shop inspections.</p></div><button id="exportRepButton" class="btn secondary">Export CSV</button></div>
+        <div class="card filter-bar"><input id="repSearch" placeholder="Search shop, agent, M-Pesa or representative email"><span></span><span></span><span></span><button id="repSearchButton" class="btn primary">Search</button></div>
+        <div class="card table-card"><div class="table-scroll"><table><thead><tr><th>Submitted</th><th>Representative email</th><th>Shop name</th><th>Location</th><th>Agent name</th><th>M-Pesa number</th><th>Till number</th><th>Selling</th><th>Canisters</th><th>Coordinates</th><th>Map</th><th>Share</th></tr></thead><tbody id="repSubmissionRows"></tbody></table></div></div>
+      </section>
+
+      <section id="view-customer-care" class="view">
+        <div class="page-title"><div><div class="kicker">CUSTOMER EXPERIENCE</div><h2>Customer care tickets</h2><p>Log customer and agent issues, assign a CSR, track resolution and export records.</p></div><div class="actions"><button id="exportTicketsButton" class="btn secondary">Export CSV</button><button id="addTicketButton" class="btn primary">+ New ticket</button></div></div>
+        <div class="card filter-bar ticket-filters"><input id="ticketSearch" placeholder="Search ticket, shop, reporter, location or issue"><select id="ticketStatus"><option value="">All statuses</option><option>Not resolved</option><option>Assigned</option><option>In progress</option><option>Resolved</option><option>Verified</option><option>Closed</option><option>On hold</option><option>Reopened</option></select><select id="ticketPriority"><option value="">All priorities</option><option>Urgent</option><option>High</option><option>Medium</option><option>Low</option></select><button id="ticketApply" class="btn primary">Apply</button></div>
+        <div id="ticketStats" class="stats-grid ticket-stats"></div>
+        <div class="card table-card"><div class="table-scroll"><table><thead><tr><th>Ticket</th><th>Date</th><th>Source</th><th>Reported by</th><th>Shop</th><th>Location</th><th>Category</th><th>Issue description</th><th>Priority</th><th>Status</th><th>CSR</th><th>Resolution</th><th>Resolved on</th><th>Actions</th></tr></thead><tbody id="ticketRows"></tbody></table></div></div>
+      </section>
+
+      <section id="view-admins" class="view">
+        <div class="page-title"><div><div class="kicker">SYSTEM ACCESS</div><h2>Administrators</h2><p>Only trusted administrators should receive full control of users and operational records.</p></div><button id="addAdmin" class="btn primary">+ Add administrator</button></div>
+        <div class="card table-card"><div class="table-scroll"><table><thead><tr><th>Email</th><th>Created</th><th>Last sign-in</th><th>Status</th><th>Actions</th></tr></thead><tbody id="adminRows"></tbody></table></div></div>
+      </section>
+
+      <section id="view-vehicles" class="view">
+        <div class="page-title"><div><div class="kicker">FLEET</div><h2>Vehicles</h2><p>Manage vehicles and odometer readings.</p></div><button id="addVehicle" class="btn primary">+ Add vehicle</button></div>
+        <div class="card table-card"><div class="table-scroll"><table><thead><tr><th>Registration</th><th>Name</th><th>Odometer</th><th>Status</th><th>Actions</th></tr></thead><tbody id="vehicleRows"></tbody></table></div></div>
+      </section>
+
+      <section id="view-fuel" class="view">
+        <div class="page-title"><div><div class="kicker">MACHINE OPERATIONS</div><h2>Machine fuel logs</h2><p>Driver refills, shop details, calibration, GPS and display evidence.</p></div></div>
+        <div class="card table-card"><div class="table-scroll"><table><thead><tr><th>Timestamp</th><th>Driver</th><th>Shop</th><th>Machine</th><th>KP</th><th>Fuel</th><th>Calibration</th><th>Refill</th><th>GPS</th><th>Display</th></tr></thead><tbody id="fuelRows"></tbody></table></div></div>
+      </section>
+
+      <section id="view-issues" class="view">
+        <div class="page-title"><div><div class="kicker">FLEET HEALTH</div><h2>Vehicle issues</h2><p>Problems reported by drivers with odometer context.</p></div></div>
+        <div class="card table-card"><div class="table-scroll"><table><thead><tr><th>Timestamp</th><th>Driver</th><th>Vehicle</th><th>Odometer</th><th>Problem</th><th>Status</th><th>Comments</th></tr></thead><tbody id="issueRows"></tbody></table></div></div>
+      </section>
+
+      <section id="view-security" class="view">
+        <div class="page-title"><div><div class="kicker">ACCESS & AUDIT</div><h2>Security activity</h2><p>Recent authentication and operational events.</p></div></div>
+        <div id="securitySummary" class="card security-summary"></div>
+        <div class="card table-card"><div class="table-scroll"><table><thead><tr><th>Time</th><th>Event</th><th>User</th><th>IP</th><th>Device</th></tr></thead><tbody id="securityRows"></tbody></table></div></div>
+      </section>
+    </main>
+  </div>
+</div>
+
+<div id="modal" class="modal" hidden>
+  <div id="modalBackdrop" class="modal-backdrop"></div>
+  <div class="modal-card" role="dialog" aria-modal="true">
+    <div class="modal-head"><div><div id="modalKicker" class="kicker">MANAGEMENT</div><h3 id="modalTitle">Add record</h3></div><button id="modalClose" class="close" type="button" aria-label="Close">×</button></div>
+    <div id="modalContent"></div>
+  </div>
+</div>
+<script src="/admin.js?v=3.5.2" defer></script>
+<script src="/admin-ui.js?v=3.5.2" defer></script>
+</body>
+</html>
