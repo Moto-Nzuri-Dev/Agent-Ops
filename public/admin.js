@@ -4,7 +4,43 @@
   const $ = (id) => document.getElementById(id);
   const esc = (v) => String(v ?? '').replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
   const wa = (v) => { const n=String(v||'').replace(/\D/g,''); if(!n)return ''; if(n.startsWith('0'))return '254'+n.slice(1); if(n.startsWith('7')||n.startsWith('1'))return '254'+n; return n; };
-  const maps = (lat,lng) => `https://www.google.com/maps?q=${encodeURIComponent(`${lat},${lng}`)}`;
+  const maps = (lat, lng, shopName = '', location = '') => {
+  const validCoordinate = (value, min, max) => {
+    if (
+      value === null ||
+      value === undefined ||
+      String(value).trim() === '' ||
+      String(value).trim() === '*'
+    ) {
+      return false;
+    }
+
+    const number = Number(value);
+    return Number.isFinite(number) && number >= min && number <= max;
+  };
+
+  if (
+    validCoordinate(lat, -90, 90) &&
+    validCoordinate(lng, -180, 180)
+  ) {
+    return `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(
+      `${Number(lat)},${Number(lng)}`
+    )}`;
+  }
+
+  const query = [shopName, location, 'Kenya']
+    .map(value => String(value || '').trim())
+    .filter(value =>
+      value &&
+      !['*', 'N/A', 'null', 'undefined'].includes(value)
+    )
+    .join(', ');
+
+  return query
+    ? `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(query)}`
+    : '';
+};
+  
   const msg = (text, error=true) => { const el=$('loginMessage'); if(el){el.textContent=text||'';el.style.color=error?'var(--bad)':'var(--good)';} };
   const notice = (text) => { const el=$('globalNotice'); if(el){el.textContent=text||'';el.hidden=!text;} };
   async function api(path, options={}) { const headers={...(options.headers||{}),Authorization:`Bearer ${state.token}`,'Content-Type':'application/json'}; const r=await fetch(path,{...options,headers}); const body=await r.json().catch(()=>({})); if(!r.ok) throw new Error(body.error||`Request failed (${r.status})`); return body; }
