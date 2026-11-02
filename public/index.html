@@ -1,0 +1,45 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#12365f">
+<meta name="description" content="Moto Nzuri Agent Sign-Up">
+<title>Moto Nzuri | Agent Sign-Up</title>
+<link rel="stylesheet" href="/styles.css?v=3.4.0">
+<link rel="icon" type="image/svg+xml" href="/favicon.svg">
+<link rel="apple-touch-icon" href="/favicon.svg">
+</head>
+<body>
+<header class="site-header"><div class="shell header-inner"><div class="brand"><img class="brand-mark small logo-image" src="/favicon.svg" alt="Moto Nzuri"><span><strong>MOTO NZURI</strong><small>AGENT NETWORK</small></span></div><span class="header-badge">AGENT REGISTRATION</span></div></header>
+<main class="shell page">
+<section class="hero"><div><span class="eyebrow">AGENT SIGN-UP</span><h1>Register your shop with Moto Nzuri.</h1><p>Capture the shop, contact, GPS and operating details needed by the field operations team.</p></div><div class="hero-index"><strong>04</strong><span>registration<br>steps</span></div></section>
+<section class="progress"><div><span class="progress-number">01</span><b>Shop</b></div><i></i><div><span class="progress-number">02</span><b>Agent</b></div><i></i><div><span class="progress-number">03</span><b>Status</b></div><i></i><div><span class="progress-number">04</span><b>Verify</b></div></section>
+<form id="shopForm" novalidate>
+<section class="form-card"><div class="section-head"><span>01</span><div><small>SHOP INFORMATION</small><h2>Your Shop</h2><p>Tell us where the shop is located.</p></div></div><div class="form-body">
+<label>Shop Name <em>*</em><input id="shopName" name="shopName" required maxlength="120" autocomplete="organization" placeholder="Enter shop name"></label>
+<label>KP / Shop Code <mark>OPTIONAL</mark><input id="kp" name="kp" maxlength="80" placeholder="Enter KP or shop code if available"><small>Leave blank if no KP or shop code is available.</small></label>
+<label>Location <em>*</em><input id="location" name="location" required maxlength="120" placeholder="e.g. Ongata Rongai"></label>
+<div class="gps-box"><div class="field-row"><label>GPS Coordinates <em>*</em></label><button type="button" id="getLocation" class="outline-btn">Capture GPS</button></div><div class="two"><label><small>LATITUDE</small><input id="latitude" name="latitude" type="number" step="any" readonly required placeholder="Not captured"></label><label><small>LONGITUDE</small><input id="longitude" name="longitude" type="number" step="any" readonly required placeholder="Not captured"></label></div><p id="gpsStatus">GPS will be attempted automatically after 15 seconds, then again at 30 seconds and 60 seconds if needed. You can also capture it manually.</p></div>
+</div></section>
+<section class="form-card"><div class="section-head"><span>02</span><div><small>CONTACT INFORMATION</small><h2>Your Details</h2><p>Provide the main contact details for the agent.</p></div></div><div class="form-body">
+<label>Agent Name <em>*</em><input id="agentName" name="agentName" required maxlength="120" autocomplete="name" placeholder="Full name"></label>
+<label>Phone Number <em>*</em><input id="phoneNumber" name="phoneNumber" type="tel" required autocomplete="tel" placeholder="e.g. 0712 345 678"></label>
+<div class="two"><label>WhatsApp Number <mark>OPTIONAL</mark><input id="whatsappNumber" name="whatsappNumber" type="tel" placeholder="WhatsApp number"></label><label>Alternative Number <mark>OPTIONAL</mark><input id="alternativeNumber" name="alternativeNumber" type="tel" placeholder="Alternative contact"></label></div>
+</div></section>
+<section class="form-card"><div class="section-head"><span>03</span><div><small>OPERATING STATUS</small><h2>Shop Status</h2><p>Record the current status of the shop.</p></div></div><div class="form-body">
+<label>Visit Date <em>*</em><input id="visitDate" name="visitDate" type="date" required></label>
+<fieldset><legend>Is the shop currently selling? <em>*</em></legend><div class="choice-grid"><label class="choice"><input type="radio" name="is_selling" value="true" required><span><b>Selling</b><small>Currently selling.</small></span></label><label class="choice"><input type="radio" name="is_selling" value="false"><span><b>Not Selling</b><small>Currently not selling.</small></span></label></div></fieldset>
+<fieldset><legend>Machine Status <em>*</em></legend><div class="choice-grid"><label class="choice"><input type="radio" name="needs_machine" value="true" required><span><b>Needs Machine</b><small>Requires a machine.</small></span></label><label class="choice"><input type="radio" name="needs_machine" value="false"><span><b>Has Machine</b><small>Already has a machine.</small></span></label></div></fieldset>
+</div></section>
+<section class="form-card"><div class="section-head"><span>04</span><div><small>SHOP VERIFICATION</small><h2>Verify Your Shop</h2><p>Add shop photos for operations verification if available.</p></div></div><div class="form-body">
+<label>Shop Photo <mark>OPTIONAL</mark><span class="upload-zone"><strong>Choose a shop photo</strong><small>JPG, PNG or WEBP · Maximum 5MB</small><input id="photo1" name="photo1" type="file" accept="image/jpeg,image/png,image/webp"></span><span id="photo1Preview" class="file-status hidden"></span></label>
+<label>Second Shop Photo <mark>OPTIONAL</mark><span class="upload-zone"><strong>Add a supporting shop photo</strong><small>Optional second photo · Maximum 5MB</small><input id="photo2" name="photo2" type="file" accept="image/jpeg,image/png,image/webp"></span><span id="photo2Preview" class="file-status hidden"></span></label>
+</div></section>
+<div id="status" class="status hidden" role="alert" aria-live="polite"></div>
+<section class="submit-card"><div><strong>Ready to submit?</strong><p>Check your details and GPS coordinates before sending.</p></div><button id="submitButton" type="submit"><span id="submitNormal">Submit Registration</span><span id="submitLoading" class="hidden">Submitting...</span></button></section>
+</form>
+<footer><strong>MOTO NZURI</strong><span>Agent Network Registration</span></footer>
+</main>
+<script src="/app.js" defer></script>
+</body></html>
