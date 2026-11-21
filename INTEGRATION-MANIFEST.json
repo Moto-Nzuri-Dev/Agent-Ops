@@ -1,0 +1,11 @@
+{
+  "base_source": "moto-nzuri-field-ops-v3.9.0-customer-care-portal(1).zip",
+  "sim_module_files": [
+    "modules/sim-management/docs",
+    "modules/sim-management/Moto_Nzuri_Shop_Map2.html",
+    "modules/sim-management/.env.example",
+    "modules/sim-management/supabase",
+    "modules/sim-management/.gitignore",
+    "modules/sim-management/modules"
+  ]
+}
